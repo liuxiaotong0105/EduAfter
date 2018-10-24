@@ -3,6 +3,8 @@ package cc.mrbird.system.controller;
 import java.util.List;
 import java.util.Map;
 
+import cc.mrbird.common.controller.BaseController;
+import cc.mrbird.system.domain.Movie;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -17,7 +19,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cc.mrbird.common.annotation.Log;
-import cc.mrbird.common.controller.BaseController;
+
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
@@ -254,5 +256,35 @@ public class UserController extends BaseController {
             log.error("更换头像失败", e);
             return ResponseBo.error("更新头像失败，请联系网站管理员！");
         }
+    }
+
+
+    @RequestMapping("movie")
+    @RequiresPermissions("movie:list")
+    public String movie() {
+
+        return "system/user/movie";
+    }
+
+    @Log("获取视频信息")
+    @RequestMapping("user/movie")
+    @RequiresPermissions("movie:list")
+    @ResponseBody
+    public Map<String, Object> movieList(QueryRequest request, Movie movie) {
+        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        List<Movie> list = this.userService.findMovie(movie, request);
+        PageInfo<Movie> pageInfo = new PageInfo<>(list);
+        return getDataTable(pageInfo);
+    }
+
+    @RequestMapping("user/updateStatus")
+    @ResponseBody
+    public void updateStatus( Movie movie){
+        userService.updateStatus(movie);
+    }
+    @RequestMapping("user/updateStatusNo")
+    @ResponseBody
+    public void updateStatusNo( Movie movie){
+        userService.updateStatusNo(movie);
     }
 }

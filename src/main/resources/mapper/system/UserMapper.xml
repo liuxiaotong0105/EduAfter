@@ -79,5 +79,27 @@
 		U .USER_ID,
 		U .dept_id
   </select>
-  
+	<select id="findMovie" resultType="Movie">
+        select * from t_movie
+		where 1=1
+		<if test="movieName != null and movieName != ''">
+			AND  movieName like '%${movieName}%'
+		</if>
+
+		<if test="movieType != null and movieType != '-1'">
+			AND movieType = #{movieType}
+		</if>
+		<if test="movieStatus != null and movieStatus != 0">
+			AND movieStatus = #{movieStatus}
+		</if>
+
+    </select>
+	<update id="updateStatus">
+
+		update t_movie set movieStatus = 1 where movieId = #{movieId}
+	</update>
+	<update id="updateStatusNo">
+
+		update t_movie set movieStatus = 2 where movieId = #{movieId}
+	</update>
 </mapper>

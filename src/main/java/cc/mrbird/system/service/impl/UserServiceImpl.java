@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import cc.mrbird.common.domain.QueryRequest;
+import cc.mrbird.system.domain.Movie;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -174,6 +175,21 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         if (user.getDeptId() == null)
             user.setDeptId(0L);
         this.updateNotNull(user);
+    }
+
+    @Override
+    public List<Movie> findMovie(Movie movie, QueryRequest request) {
+        return  this.userMapper.findMovie(movie);
+    }
+
+    @Override
+    public void updateStatus(Movie movie) {
+        userMapper.updateStatus(movie);
+    }
+
+    @Override
+    public void updateStatusNo(Movie movie) {
+        userMapper.updateStatusNo(movie);
     }
 
 }
