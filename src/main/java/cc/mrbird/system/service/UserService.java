@@ -2,6 +2,7 @@ package cc.mrbird.system.service;
 
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.service.IService;
+import cc.mrbird.system.domain.Movie;
 import cc.mrbird.system.domain.User;
 import cc.mrbird.system.domain.UserWithRole;
 import org.springframework.cache.annotation.CacheConfig;
@@ -41,4 +42,10 @@ public interface UserService extends IService<User> {
     User findUserProfile(User user);
 
     void updateUserProfile(User user);
+
+    List<Movie> findMovie(Movie movie, QueryRequest request);
+
+    void updateStatus(Movie movie);
+
+    void updateStatusNo(Movie movie);
 }
