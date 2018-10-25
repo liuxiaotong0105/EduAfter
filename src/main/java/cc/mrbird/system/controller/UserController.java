@@ -282,9 +282,14 @@ public class UserController extends BaseController {
     public void updateStatus( Movie movie){
         userService.updateStatus(movie);
     }
+
+
     @RequestMapping("user/updateStatusNo")
     @ResponseBody
     public void updateStatusNo( Movie movie){
         userService.updateStatusNo(movie);
     }
+
+
+
 }
