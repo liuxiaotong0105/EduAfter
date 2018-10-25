@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.AdvertisingMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.Advertising">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="advId" jdbcType="DECIMAL" property="advId" />
+    <result column="advName" jdbcType="VARCHAR" property="advName" />
+    <result column="advTimes" jdbcType="TIMESTAMP" property="advTimes" />
+    <result column="advTimee" jdbcType="TIMESTAMP" property="advTimee" />
+    <result column="compName" jdbcType="VARCHAR" property="compName" />
+    <result column="advStatus" jdbcType="VARCHAR" property="advStatus" />
+    <result column="advPhoto" jdbcType="VARCHAR" property="advPhoto" />
+    <result column="advUrl" jdbcType="VARCHAR" property="advUrl" />
+
+
+  </resultMap>
+</mapper>

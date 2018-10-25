@@ -34,6 +34,7 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public List<UserOnline> list() {
         List<UserOnline> list = new ArrayList<>();
+        //获取登陆的人
         Collection<Session> sessions = sessionDAO.getActiveSessions();
         for (Session session : sessions) {
             UserOnline userOnline = new UserOnline();
@@ -42,13 +43,15 @@ public class SessionServiceImpl implements SessionService {
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
                 continue;
             } else {
-                principalCollection = (SimplePrincipalCollection) session
-                        .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+                //获取的对象  放到userOnline的对象中去
+                principalCollection = (SimplePrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
                 user = (User) principalCollection.getPrimaryPrincipal();
                 userOnline.setUsername(user.getUsername());
                 userOnline.setUserId(user.getUserId().toString());
             }
+            //设置编号
             userOnline.setId((String) session.getId());
+            //设置IP地址
             userOnline.setHost(session.getHost());
             userOnline.setStartTimestamp(session.getStartTimestamp());
             userOnline.setLastAccessTime(session.getLastAccessTime());

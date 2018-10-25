@@ -1,3 +1,4 @@
+<div data-th-include="system/advertising/advertisingAdd"></div>
 <div class="card">
     <div class="card-block">
         <div class="table-responsive">
@@ -5,57 +6,48 @@
                 <div class="dataTables_buttons hidden-sm-down actions">
                     <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
                     <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
-                      <div class="dropdown actions__item">
+                    <div class="dropdown actions__item">
                         <i data-toggle="dropdown" class="zmdi zmdi-download">
 		            </i>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportLogExcel()">
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportAdvertisingExcel()">
 		                    Excel (.xlsx)
 		                </a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportLogCsv()">
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportAdvertisingCsv()">
 		                    CSV (.csv)
 		                </a>
                         </ul>
-                    </div> 
-                    <div class="dropdown actions__item" shiro:hasPermission="log:delete">
+                    </div>
+                    <div class="dropdown actions__item" shiro:hasAnyPermissions="advertising:add,advertising:update,advertising:delete">
                         <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteLogs()" shiro:hasPermission="log:delete">删除日志</a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#advertising-add" shiro:hasPermission="advertising:add">新增广告</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateAdvertising()" shiro:hasPermission="advertising:update">修改广告</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteAdvertising()" shiro:hasPermission="advertising:delete">删除广告</a>
                         </div>
                     </div>
                 </div>
                 <div id="data-table_filter" class="dataTables_filter">
-                    <form class="log-table-form">
+                    <form class="advertising-table-form">
                         <div class="row">
-                        	<div class="col-sm-4">
+                            <div class="col-sm-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">
-					               	操作时间：
+					               	广告名称：
 					            </span>
                                     <div class="form-group">
-                                        <input type="text" name="timeField" class="form-control">
+                                        <input type="text" name="advName" class="form-control">
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">
-					               	操作用户：
+					               	公司名称：
 					            </span>
                                     <div class="form-group">
-                                        <input type="text" name="username" class="form-control">
-                                        <i class="form-group__bar"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	描述：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="operation" class="form-control">
+                                        <input type="text" name="compName" class="form-control">
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
@@ -64,10 +56,11 @@
                     </form>
                 </div>
                 <div class="table-responsive">
-                    <table id="logTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+                    <table id="advertisingTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script data-th-src="@{js/app/system/log/log.js}"></script>
+<script data-th-src="@{js/app/system/advertising/advertising.js}"></script>
+<script data-th-src="@{js/app/system/advertising/advertisingEdit.js}"></script>

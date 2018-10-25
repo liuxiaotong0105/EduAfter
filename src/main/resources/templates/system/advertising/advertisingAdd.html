@@ -1,0 +1,107 @@
+
+<div class="modal fade" id="advertising-add" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="advertising-add-modal-title">新增广告</h3>
+            </div>
+            <div class="modal-body">
+                <form id="advertising-add-form" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	广告名称：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="advName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	公司名称：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="compName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	起始时间：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" id="advTimes" name="advTimes"  class="form_datetime" data-date-format="yyyy-mm-dd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	结束时间：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" id="advTimee" name="advTimee"  class="form_datetime" data-date-format="yyyy-mm-dd">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	广告封面：
+					            </span>
+                                <div class="form-group">
+                                    <input type="file" name="file" id="files">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="advertising-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/system/advertising/advertisingAdd.js}"></script>
+
+<script>
+    $(function(){
+        $.fn.datetimepicker.dates['zh-CN'] = {
+            days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+            daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+            daysMin:  ["日", "一", "二", "三", "四", "五", "六", "日"],
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            today: "今日",
+            suffix: [],
+            meridiem: ["上午", "下午"],
+            weekStart: 1
+        };
+
+        $('#advTimes').datetimepicker({
+            language:"zh-CN",
+            todayHighlight: true,
+            minView:2,//最精准的时间选择为日期0-分 1-时 2-日 3-月
+            weekStart:1
+        });
+        $('#advTimee').datetimepicker({
+            language:"zh-CN",
+            todayHighlight: true,
+            minView:2,//最精准的时间选择为日期0-分 1-时 2-日 3-月
+            weekStart:1
+        });
+
+    });
+
+</script>

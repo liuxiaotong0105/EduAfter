@@ -1,19 +1,31 @@
 package cc.mrbird;
 
 import cc.mrbird.common.config.FebsProperties;
+import com.github.tobato.fastdfs.FdfsClientConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableMBeanExport;
+import org.springframework.context.annotation.Import;
+import org.springframework.jmx.support.RegistrationPolicy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.servlet.MultipartConfigElement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Configuration   //加入了最大传送数据  得加这个注解
+@Import(FdfsClientConfig.class)
+@EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
+//以上是fastDFS  需要得注解
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan("cc.mrbird.*.dao")
@@ -27,5 +39,19 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
         log.info("FEBS started up successfully at {} {}", LocalDate.now(), LocalTime.now());
+    }
+
+    /**
+     * 配置上传文件大小的配置
+     * @return
+     */
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //  单个数据大小
+        factory.setMaxFileSize("102400KB");
+        /// 总上传数据大小
+        factory.setMaxRequestSize("102400KB");
+        return factory.createMultipartConfig();
     }
 }
