@@ -7,6 +7,8 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.system.domain.Movie;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.common.SolrInputDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SolrClient client;
 
     private static final String ON = "on";
 
@@ -280,14 +285,63 @@ public class UserController extends BaseController {
     @RequestMapping("user/updateStatus")
     @ResponseBody
     public void updateStatus( Movie movie){
-        userService.updateStatus(movie);
+        try {
+            int id = movie.getMovieId();
+            Movie reMovie = userService.queryMovieById(id);
+            userService.updateStatus(movie);
+
+            reMovie.setMovieStatus(1);
+            SolrInputDocument doc = new SolrInputDocument();
+            doc.setField("id",reMovie.getMovieId());
+            doc.setField("movie_name",reMovie.getMovieName());
+            doc.setField("free_status",reMovie.getFreeStatus());
+            doc.setField("movie_url",reMovie.getMovieUrl());
+            doc.setField("movie_picther",reMovie.getMoviePicther());
+            doc.setField("movie_info",reMovie.getMovieInfo());
+            doc.setField("movie_status",reMovie.getMovieStatus());
+            doc.setField("movie_type",reMovie.getMovieType());
+            doc.setField("movie_price",reMovie.getMoviePrice());
+            doc.setField("teacher_id",reMovie.getTeacherid());
+            doc.setField("movie_class",reMovie.getMovieClass());
+            doc.setField("teacher_name",reMovie.getTeacherName());
+            client.add("core1", doc);
+            //client.commit();
+            client.commit("core1");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
     @RequestMapping("user/updateStatusNo")
     @ResponseBody
     public void updateStatusNo( Movie movie){
-        userService.updateStatusNo(movie);
+        try {
+            Movie reMovie = userService.queryMovieById(movie.getMovieId());
+            userService.updateStatusNo(movie);
+
+            reMovie.setMovieStatus(2);
+            SolrInputDocument doc = new SolrInputDocument();
+            doc.setField("id",reMovie.getMovieId());
+            doc.setField("movie_name",reMovie.getMovieName());
+            doc.setField("free_status",reMovie.getFreeStatus());
+            doc.setField("movie_url",reMovie.getMovieUrl());
+            doc.setField("movie_picther",reMovie.getMoviePicther());
+            doc.setField("movie_info",reMovie.getMovieInfo());
+            doc.setField("movie_status",reMovie.getMovieStatus());
+            doc.setField("movie_type",reMovie.getMovieType());
+            doc.setField("movie_price",reMovie.getMoviePrice());
+            doc.setField("teacher_id",reMovie.getTeacherid());
+            doc.setField("movie_class",reMovie.getMovieClass());
+            doc.setField("teacher_name",reMovie.getTeacherName());
+            client.add("core1", doc);
+            //client.commit();
+            client.commit("core1");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

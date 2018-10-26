@@ -102,4 +102,9 @@
 
 		update t_movie set movieStatus = 2 where movieId = #{movieId}
 	</update>
+
+	<select id="queryMovieById" resultType="Movie" >
+
+		select *  from t_movie where movieId = #{value}
+	</select>
 </mapper>

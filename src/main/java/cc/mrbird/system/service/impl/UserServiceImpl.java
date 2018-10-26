@@ -192,4 +192,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         userMapper.updateStatusNo(movie);
     }
 
+    @Override
+    public Movie queryMovieById(Integer movieId) {
+        return userMapper.queryMovieById(movieId);
+    }
+
 }

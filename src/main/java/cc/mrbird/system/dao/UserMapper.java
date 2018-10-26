@@ -20,4 +20,7 @@ public interface UserMapper extends MyMapper<User> {
 	void updateStatus(Movie movie);
 
 	void updateStatusNo(Movie movie);
+
+	Movie queryMovieById(int id);
+
 }

@@ -21,7 +21,7 @@ $(function () {
             field: 'movieUrl',
             title: '视频预览',
             formatter: function (value, row, index) {
-                return '<video controls width="300px">' +
+                return '<video controls width="200px" height="120px">' +
                     '    <source src="'+value+'" type="video/mp4"/>' +
                     '</video>'
             }
@@ -36,13 +36,19 @@ $(function () {
 
             }
         }, {
+            field: 'movieClass',
+            title: '视频介绍'
+        },{
+            field: 'movieType',
+            title: '视频介绍'
+        },{
             field: 'movieInfo',
             title: '视频介绍'
         }, {
             field: 'movieStatus',
             title: '视频状态',
             formatter: function (value, row, index) {
-                if (value === 0) return '<a href="javascript:update(\''+row.movieId+'\')" >审核通过</a><br><br><br><a href="javascript:updateNo(\''+row.movieId+'\')" >审核拒绝</a>';
+                if (value === 0) return '<a href="javascript:update('+row.movieId+')" >审核通过</a><br><br><br><a href="javascript:updateNo(\''+row.movieId+'\')" >审核拒绝</a>';
                 else if (value === 1) return '通过';
                 else if (value === 2) return '不通过';
                 else return '其他';

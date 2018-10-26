@@ -14,7 +14,7 @@ public class Movie implements Serializable {
 	@Id
 	@GeneratedValue(generator = "JDBC")
 	@Column(name = "movieId")
-	private String movieId;
+	private Integer movieId;
 
 	@Column(name = "movieName")
 	private String movieName;
@@ -41,23 +41,33 @@ public class Movie implements Serializable {
 	@Column(name = "movieTeacher")
 	private String movieTeacher;
 
-	public String getMovieId() {
+	@Column(name = "teacherid")
+	private Integer teacherid;
+
+	@Column(name = "freeStatus")
+	private Integer freeStatus;
+
+	@Column(name = "movieClass")
+	private String movieClass;
+
+	@Column(name = "teacherName")
+	private String teacherName;
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public Integer getMovieId() {
 		return movieId;
 	}
 
-	public void setMovieId(String movieId) {
+	public void setMovieId(Integer movieId) {
 		this.movieId = movieId;
 	}
-
-	public Integer getMovieStatus() {
-		return movieStatus;
-	}
-
-	public void setMovieStatus(Integer movieStatus) {
-		this.movieStatus = movieStatus;
-	}
-
-
 
 	public String getMovieName() {
 		return movieName;
@@ -73,6 +83,22 @@ public class Movie implements Serializable {
 
 	public void setMovieUrl(String movieUrl) {
 		this.movieUrl = movieUrl;
+	}
+
+	public Integer getMovieStatus() {
+		return movieStatus;
+	}
+
+	public void setMovieStatus(Integer movieStatus) {
+		this.movieStatus = movieStatus;
+	}
+
+	public String getMovieType() {
+		return movieType;
+	}
+
+	public void setMovieType(String movieType) {
+		this.movieType = movieType;
 	}
 
 	public String getMoviePicther() {
@@ -105,5 +131,29 @@ public class Movie implements Serializable {
 
 	public void setMovieTeacher(String movieTeacher) {
 		this.movieTeacher = movieTeacher;
+	}
+
+	public Integer getTeacherid() {
+		return teacherid;
+	}
+
+	public void setTeacherid(Integer teacherid) {
+		this.teacherid = teacherid;
+	}
+
+	public Integer getFreeStatus() {
+		return freeStatus;
+	}
+
+	public void setFreeStatus(Integer freeStatus) {
+		this.freeStatus = freeStatus;
+	}
+
+	public String getMovieClass() {
+		return movieClass;
+	}
+
+	public void setMovieClass(String movieClass) {
+		this.movieClass = movieClass;
 	}
 }

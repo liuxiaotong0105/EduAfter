@@ -48,4 +48,6 @@ public interface UserService extends IService<User> {
     void updateStatus(Movie movie);
 
     void updateStatusNo(Movie movie);
+
+    Movie queryMovieById(Integer movieId);
 }
