@@ -13,7 +13,7 @@ $(function () {
         var end =  $("#advTimee").val();
 
         if(start > end){
-            $MB.n_success("请填写正确时间，结束时间不得在起始时间之前！");
+            $MB.n_warning("请填写正确时间，结束时间不得在起始时间之前！");
         }else{
         var name = $(this).attr("name");
         validator = $("#advertising-add-form").validate();

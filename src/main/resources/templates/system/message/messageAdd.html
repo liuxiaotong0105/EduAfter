@@ -1,0 +1,45 @@
+
+<div class="modal fade" id="message-add" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="message-add-modal-title">新增推送</h3>
+            </div>
+            <div class="modal-body">
+                <form id="message-add-form" >
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	推送名称：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="messageName" class="form-control" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					                推送内容：
+					            </span>
+                                <div class="form-group">
+                                    <textarea   name="messageInfo" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="message-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/system/message/messageAdd.js}"></script>
+
