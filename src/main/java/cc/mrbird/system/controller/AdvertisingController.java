@@ -45,7 +45,7 @@ public class AdvertisingController extends BaseController {
 
     private static final String ON = "on";
 
-    @Log("获取广告信息")
+       @Log("获取广告信息")
     @RequestMapping("advertising")
     @RequiresPermissions("advertising:list")
     public String index() {

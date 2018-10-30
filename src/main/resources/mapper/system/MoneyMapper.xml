@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.MoneyMapper">
+
+  <select id="findAllMoney" resultType="cc.mrbird.system.domain.Money">
+    select tuvc.id moneyId, tm.movieName videoName, tm.moviePrice videoPrice , tlu.`name` userName
+      from t_user_video_course tuvc , t_movie tm ,t_login_user tlu
+        where tuvc.user_id = tlu.id and tuvc.video_id = tm.movieId
+  </select>
+  <select id="findAllMoneySum" resultType="cc.mrbird.system.domain.Money">
+   select SUM(a.videoPrice) sums from (
+		select tuvc.id moneyId, tm.movieName videoName, tm.moviePrice videoPrice , tlu.`name` userName
+		from t_user_video_course tuvc , t_movie tm ,t_login_user tlu
+		where tuvc.user_id = tlu.id and tuvc.video_id = tm.movieId
+							)a
+  </select>
+
+</mapper>
