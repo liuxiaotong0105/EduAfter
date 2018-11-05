@@ -17,7 +17,6 @@ $(function() {
             {
                 field: 'advId',
                 title: '广告编号',
-                width: 150
             }, {
                 field: 'advName',
                 title: '广告名称'
@@ -25,34 +24,38 @@ $(function() {
                 field: 'compName',
                 title: '公司名称'
             }, {
-                field: 'advStatus',
-                title: '广告状态',
-                formatter(value,rows,index){
-                    var d = new Date()
-                    var datetime=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-                    if(rows.advTimes < datetime && datetime < rows.advTimee ){
-                        return "投放中";
-                    }
-                    else{
-                        return "已失效";
-                    }
-                }
+                field: 'advUserName',
+                title: '负责人'
+            }, {
+                field: 'advUserPhone',
+                title: '负责人电话'
+            // }, {
+            //     field: 'advStatus',
+            //     title: '广告状态',
+            //     formatter(value,rows,index){
+            //         var d = new Date()
+            //         var datetime=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+            //         if(rows.advTimes < datetime && datetime < rows.advTimee ){
+            //             return "投放中";
+            //         }
+            //         else{
+            //             return "已失效";
+            //         }
+            //     }
             }, {
                 field: 'advPhoto',
-                title: '广告封面',
+                title: '广告展示',
+                width: '300',
                 formatter(value,rows,index){
                     var str = rows.advUrl.split(".");
-                    if(str[4] == "mp3"){
-                        return "<audio  src= '"+rows.advUrl+"'  controls='true'></audio>"
-                    }
-                    else if(str[4] == "mp4"){
+                    if(str[4] == "mp4"){
                         return "<video controls width='300px'> <source src='"+rows.advUrl+"' type='video/mp4'/></video>"
                     }
-                    else if(str[4] == "jpg" || str[4] == "bmp" || str[4] == "png" || str[4] == "gif"){
+                    else if(str[4] == "jpg" ){
                         return "<img  src='"+rows.advUrl+"' width='300'>"
                     }
                     else {
-                        return "<a href='javascript:open(\""+rows.advUrl+"\")'>点击查看</a>"
+                        return "文件损坏"
                     }
                 }
             }, {
@@ -61,6 +64,20 @@ $(function() {
             }, {
                 field: 'advTimee',
                 title: '结束时间'
+            }, {
+                field: 'advAdd',
+                title: '广告位置',
+                formatter(value,rows,index){
+                    if(rows.advAdd == 1 ){
+                        return "轮播图广告";
+                    }
+                    if(rows.advAdd == 2 ){
+                        return "视频广告";
+                    }
+                    else{
+                        return "文件损坏";
+                    }
+                }
             }
         ]
     };

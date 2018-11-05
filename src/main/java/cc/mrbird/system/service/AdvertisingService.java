@@ -14,4 +14,8 @@ public interface AdvertisingService extends IService<Advertising> {
     List<Advertising> findAllAdvertising(Advertising advertising, QueryRequest request);
 
     void addAdvertising(Advertising advertising);
+
+    List<Advertising> queryAllAdvertising();
+
+    void deleteAdvByIds(List<Advertising> deleteAdvList);
 }

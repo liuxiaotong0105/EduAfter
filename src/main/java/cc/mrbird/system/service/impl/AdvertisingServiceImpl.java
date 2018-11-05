@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,9 @@ import java.util.List;
 public class AdvertisingServiceImpl extends BaseService<Advertising> implements AdvertisingService {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Resource
+    private AdvertisingMapper advertisingMapper;
 
 
 
@@ -61,4 +65,16 @@ public class AdvertisingServiceImpl extends BaseService<Advertising> implements 
     public void addAdvertising(Advertising advertising) {
         this.save(advertising);
     }
+
+    @Override
+    public List<Advertising> queryAllAdvertising() {
+        return advertisingMapper.queryAllAdvertising();
+    }
+
+    @Override
+    public void deleteAdvByIds(List<Advertising> deleteAdvList) {
+        advertisingMapper.deleteAdvByIds(deleteAdvList);
+    }
+
+
 }

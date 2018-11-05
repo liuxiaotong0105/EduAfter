@@ -16,16 +16,18 @@ import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.context.annotation.Import;
 import org.springframework.jmx.support.RegistrationPolicy;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.servlet.MultipartConfigElement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Configuration   //加入了最大传送数据  得加这个注解
-@Import(FdfsClientConfig.class)
-@EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
-//以上是fastDFS  需要得注解
+
+@EnableScheduling
+@Configuration   //加入了最大传送数据  得加这个注解//fastDFS
+@Import(FdfsClientConfig.class)//fastDFS
+@EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)//fastDFS
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan("cc.mrbird.*.dao")

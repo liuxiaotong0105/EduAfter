@@ -10,6 +10,28 @@
                         <div class="col-sm-5">
                             <div class="input-group">
                                 <span class="input-group-addon">
+					               	负责人名称：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="advUserName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	负责人电话：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="advUserPhone" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
 					               	广告名称：
 					            </span>
                                 <div class="form-group">
@@ -57,8 +79,10 @@
 					               	广告位置：
 					            </span>
                                 <div class="form-group">
-                                    <input type="radio" name="advAdd" value="1">轮播图广告
-                                    <input type="radio" name="advAdd" value="2">视频广告
+                                    <input type="radio" name="advAdd" onclick="dian(1)" value="1">轮播图广告
+                                    <input type="radio" name="advAdd" onclick="dian(2)" value="2">视频广告
+                                    <input type="hidden" id="val" >
+
                                 </div>
                             </div>
                         </div>

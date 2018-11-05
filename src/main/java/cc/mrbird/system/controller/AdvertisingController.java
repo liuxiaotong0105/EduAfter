@@ -11,11 +11,14 @@ import cc.mrbird.system.service.AdvertisingService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import io.goeasy.GoEasy;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,10 +26,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@Component
 public class AdvertisingController extends BaseController {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -37,13 +45,14 @@ public class AdvertisingController extends BaseController {
     @Autowired
     FastFileStorageClient fastFileStorageClient;
 
-    @Value("192.168.31.252:22122")
+    @Value("192.168.31.253:22122")
     private String fdfsIP;
 
     @Autowired
     private AdvertisingService advertisingService;
 
     private static final String ON = "on";
+
 
        @Log("获取广告信息")
     @RequestMapping("advertising")
@@ -117,6 +126,44 @@ public class AdvertisingController extends BaseController {
             e.printStackTrace();
         }
     }
+
+    //每1分钟执行一次
+    @Scheduled(cron = "0 */1 *  * * * ")
+    public void deleteAdv() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Advertising> list = advertisingService.queryAllAdvertising();
+
+        Date date = new Date();
+        List<Advertising> deleteAdvList = new ArrayList<>();
+        for (Advertising advertising : list) {
+            Date time = format.parse(advertising.getAdvTimee());
+            if( date.getTime()>=time.getTime()){
+                deleteAdvList.add(advertising);
+            }
+        }
+        if (deleteAdvList.size()!=0){
+            advertisingService.deleteAdvByIds(deleteAdvList);
+            ArrayList<String> advNames = new ArrayList<>();
+            for (Advertising adv:deleteAdvList){
+                advNames.add(adv.getAdvName());
+            }
+            String info = "";
+            for(String name:advNames){
+                info +=info == ""? name:","+name;
+            }
+
+
+
+        }
+
+
+        System.out.println ("删除过时广告: The time is now " + new Date());
+
+
+    }
+
+
+
 
 
 

@@ -1,12 +1,14 @@
 var validator;
 var $advertisingAddForm = $("#advertising-add-form");
-
+function dian(num){
+    $('#val').val(num)
+}
 $(function () {
     validateRule();
     gaozhi()
     function gaozhi(){
         $MB.n_danger("请注意！！！上传文件格式后缀为小写！！！");
-        $MB.n_danger("目前只显示以mp3，mp4，jpg，bmp，png，gif为结尾的文件！！！");
+        $MB.n_danger("目前能上传以mp4，jpg为结尾的文件！！！");
     }
     $("#advertising-add .btn-save").click(function () {
         var start =  $("#advTimes").val();
@@ -21,6 +23,11 @@ $(function () {
         if (flag) {
             if (name === "save") {
                 var formData = new FormData($("form")[0]);
+                var adds = $('#val').val();
+                var file = $('#files').val().substr(length-3);
+                //1  轮播图
+                //2  视频
+                if(adds == 1 && file == 'jpg'){
                     $.ajax({
                         url:"../advertisingFdfs/add",
                         type:"post",
@@ -38,6 +45,28 @@ $(function () {
                             } else $MB.n_danger(r.msg);
                         }
                     });
+                }else if(adds == 2 && file == 'mp4'){
+                    $.ajax({
+                        url:"../advertisingFdfs/add",
+                        type:"post",
+                        async:false,
+                        processData:false, //过程数据
+                        contentType:false, //内容类型
+                        data: formData,
+                        dataType:"json",
+                        success:function (r) {
+                            if (r.code === 0) {
+                                closeModal();
+                                refresh();
+                                alert(r.msg)
+                                $MB.n_success(r.msg);
+                            } else $MB.n_danger(r.msg);
+                        }
+                    });
+                }else {
+                    $MB.n_danger("请选择相应的广告位，文件格式！！！");
+                }
+
             }
         }
         }
@@ -64,7 +93,11 @@ function validateRule() {
                 required: true,
                 maxlength: 10
             },
-            compName: {
+            advUSerName: {
+                required: true,
+                maxlength: 10
+            },
+            advUserPhone: {
                 required: true,
                 maxlength: 10
             },
@@ -89,6 +122,14 @@ function validateRule() {
             compName: {
                 required: icon + "请输入公司名称",
                 maxlength: icon + "长度不能超过10个字符"
+            },
+            advUserName: {
+                required: icon + "请输入负责人姓名",
+                maxlength: icon + "长度不能超过10个字符"
+            },
+            advUserPhone: {
+                required: icon + "请输入负责人手机号",
+                maxlength: icon + "长度不能超过11个字符"
             },
             advTimes: {
                 required: icon + "请选择开始时间",

@@ -124,6 +124,7 @@ $(window).on("load", function () {
     });
 });
 
+
 /**
  * 用于加载菜单内容
  * @param obj
@@ -199,4 +200,7 @@ function fullScreen(obj) {
             elem.exitFullscreen();
         }
     }
+
+
+
 }

@@ -46,6 +46,41 @@ public class Advertising implements Serializable {
     @ExportConfig(value = "广告链接")
     private String advUrl;
 
+    @Column(name = "advAdd")
+    @ExportConfig(value = "广告位置")
+    private String advAdd;
+
+    @Column(name = "advUserName")
+    @ExportConfig(value = "负责人名称")
+    private String advUserName;
+
+    @Column(name = "advUserPhone")
+    @ExportConfig(value = "负责人电话")
+    private String advUserPhone;
+
+    public String getAdvUserName() {
+        return advUserName;
+    }
+
+    public void setAdvUserName(String advUserName) {
+        this.advUserName = advUserName;
+    }
+
+    public String getAdvUserPhone() {
+        return advUserPhone;
+    }
+
+    public void setAdvUserPhone(String advUserPhone) {
+        this.advUserPhone = advUserPhone;
+    }
+
+    public String getAdvAdd() {
+        return advAdd;
+    }
+
+    public void setAdvAdd(String advAdd) {
+        this.advAdd = advAdd;
+    }
 
     // 用于搜索条件中的时间字段
     @Transient
