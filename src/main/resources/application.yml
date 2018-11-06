@@ -63,6 +63,7 @@ spring:
           log-slow-sql: true
   data:
     solr:
+      #sole  搜索引擎库的ip地址
       host: http://127.0.0.1:8080/solr
 
     #针对fastDFS上传文件大小限制问题
